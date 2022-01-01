@@ -11,5 +11,5 @@ mongoose.set('debug', true);
 
 mongoose
   .connect(URI)
-  .then(() => console.log('DB is up.'))
+  .then(() => console.log('MongoDB connected!'))
   .catch((err) => console.log(err));

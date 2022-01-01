@@ -1,23 +1,22 @@
 const express = require('express');
-//const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-const app = express();
+const morgan = require('morgan');
+const cors = require('cors');
+const pinRoutes = require('./routes/pins');
+const userRoutes = require('./routes/users');
 
 
 require('./database');
+const app = express();
 
-app.use(express.json);
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(cors());
 
-// mongoose
-//   .connect(process.env.MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => {
-//     console.log('Mongo Connectd');
-//   })
-//   .catch((err) => console.log(err));
+app.use('/api/users', userRoutes);
+app.use('/api/pins', pinRoutes);
 
-app.listen(8800, () => {
+//console.log(pinRoutes);
+
+app.listen(3333, () => {
     console.log("🚀 server is running");
   })
